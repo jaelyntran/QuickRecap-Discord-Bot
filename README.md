@@ -1,2 +1,1 @@
-This project contains a word count ranking Discord app written in JavaScript
-
+This project contains a message summary Discord app written in JavaScript

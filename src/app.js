@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import { Client, GatewayIntentBits } from 'discord.js';
-import { tallyWordUsage } from './commands.js';
-import {summarizeMessages} from "./utils.js";
+import { summarizeMessages } from "./utils.js";
 
 // Create a Discord client with necessary intents
 const client = new Client({

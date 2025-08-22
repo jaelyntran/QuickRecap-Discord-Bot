@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { REST, Routes, SlashCommandBuilder } from 'discord.js';
+import { SlashCommandBuilder } from 'discord.js';
 
 const commands = [
     new SlashCommandBuilder()
@@ -9,10 +9,8 @@ const commands = [
             option.setName("count")
                 .setDescription("Number of messages to summarize (default 100)")
                 .setRequired(false)
-        )
-]
+        ),
 
-const commands = [
     new SlashCommandBuilder()
         .setName('autosummarize')
         .setDescription('Enable or disable auto summarization per 100 messages in this channel')
