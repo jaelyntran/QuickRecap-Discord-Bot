@@ -30,3 +30,4 @@ bin/
 Counter-Discord-Bot.iml
 .idea/
 .env
+node_modules/
