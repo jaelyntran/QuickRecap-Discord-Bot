@@ -11,6 +11,5 @@ export async function handleCommand(channel, count) {
         .map(message => message.content)
 
     const text = filteredMessages.join('\n');
-    const summary = await summarizeMessages(text);
-    return summary
+    return summarizeMessages(text);
 }
