@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { Client, GatewayIntentBits } from 'discord.js';
-import { handleCommand, summarizeMessages } from "./utils.js";
-import { commands } from './commands.js';
+import { handleCommand, summarizeMessages } from "./src/utils.js";
+import { commands } from './src/commands.js';
 import { REST, Routes } from 'discord.js';
 
 
@@ -34,7 +34,7 @@ const client = new Client({
 const autoSummaryChannels = {};
 const messageBuffer = {};
 
-client.once('ready', () => {
+client.once('clientReady', () => {
     console.log(`Logged in as ${client.user.tag}`);
 })
 
