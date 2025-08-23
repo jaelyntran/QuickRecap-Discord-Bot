@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { SlashCommandBuilder } from 'discord.js';
 
-const commands = [
+export const commands = [
     new SlashCommandBuilder()
         .setName('summarize')
         .setDescription('Summarizes the last N messages in this channel (up to 500)')

@@ -1,8 +1,28 @@
 import 'dotenv/config';
 import { Client, GatewayIntentBits } from 'discord.js';
-import {handleCommand, summarizeMessages} from "./utils.js";
+import { handleCommand, summarizeMessages } from "./utils.js";
+import { commands } from './commands.js';
+import { REST, Routes } from 'discord.js';
 
-// Create a Discord client with necessary intents
+
+const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
+
+async function main() {
+    try {
+        console.log("Registering slash commands...");
+        await rest.put(
+            Routes.applicationGuildCommands(process.env.APP_ID, process.env.GUILD_ID),
+            { body: commands }
+        );
+        console.log("✅ Slash commands registered.");
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+main();
+
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -10,6 +30,7 @@ const client = new Client({
         GatewayIntentBits.MessageContent
     ]
 });
+
 const autoSummaryChannels = {};
 const messageBuffer = {};
 
