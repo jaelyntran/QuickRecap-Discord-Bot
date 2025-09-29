@@ -2,11 +2,11 @@
   "name": "counter-discord-bot",
   "version": "1.0.0",
   "description": "A word counter Discord bot",
-  "main": "app.js",
+  "main": "src/app.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
   },
   "author": "Jaelyn Tran",
   "license": "MIT",
