@@ -3,8 +3,7 @@ This project contains a message summary Discord app written in JavaScript
 ## Inviting the Bot to the Server (No Setup Required)
 You can invite the hosted version of this bot directly to your server.
 
-1. Click the invite link below:
-https://discord.com/oauth2/authorize?client_id=1408282486424862822
+1. Click the invite link: [Invite QuickRecap](https://discord.com/oauth2/authorize?client_id=1408282486424862822)
 
 2. Select the server you want to add the bot to.
    
@@ -14,20 +13,14 @@ https://discord.com/oauth2/authorize?client_id=1408282486424862822
 ## Self-Host the Bot 
 If you want to run your own copy of the bot:
 
-1. Clone the repository
-```git clone https://github.com/jaelyntran/QuickRecap-Discord-Bot```
-2. After cloning, navigate to the new directory
-```cd QuickRecap-Discord-Bot```
+1. Clone the repository ```git clone https://github.com/jaelyntran/QuickRecap-Discord-Bot```.
+2. After cloning, navigate to the new directory ```cd QuickRecap-Discord-Bot```.
 
-3. Check if node exists by running
-```node -v```
-
-If not installed:
+3. Check if node exists by running ```node -v```. If not installed:
 - Download Node.js from nodejs.org (LTS version recommended).
-- Follow the installer instructions (npm is bundled with Node.js)
+- Follow the installer instructions (npm is bundled with Node.js).
 
-4. Install all required packages listed in the package.json file
-```npm install```
+4. Install all required packages listed in the package.json file ```npm install```.
    
 5. Set up environment variables
 Create a .env file in the project root with the following:
@@ -38,13 +31,10 @@ DISCORD_TOKEN=your-bot-token
 PUBLIC_KEY=your-public-key
 ```
 
-6. Deploy slash commands
-```node src/deploy-commands.js```
+6. Deploy slash commands ```node src/deploy-commands.js```.
 
-7. Run the bot locally
-```node src/app.js```
+7. Run the bot locally ```node src/app.js```.
 * Global commands can take up to an hour to update.
 
-8. To clear all commands, run
-```node src/clear-commands.js```
+8. To clear all commands, run ```node src/clear-commands.js```.
 
