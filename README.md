@@ -16,20 +16,20 @@ If you want to run your own copy of the bot:
 
 1. Clone the repository
 ```git clone https://github.com/jaelyntran/QuickRecap-Discord-Bot```
-After cloning, navigate to the new directory:
+2. After cloning, navigate to the new directory
 ```cd QuickRecap-Discord-Bot```
 
-2. Check if node exists by running
+3. Check if node exists by running
 ```node -v```
 
 If not installed:
 - Download Node.js from nodejs.org (LTS version recommended).
 - Follow the installer instructions (npm is bundled with Node.js)
 
-3. Install all required packages listed in the package.json file
+4. Install all required packages listed in the package.json file
 ```npm install```
    
-4. Set up environment variables
+5. Set up environment variables
 Create a .env file in the project root with the following:
 ```
 APP_ID=your-app-id
@@ -38,13 +38,13 @@ DISCORD_TOKEN=your-bot-token
 PUBLIC_KEY=your-public-key
 ```
 
-5. Deploy slash commands
+6. Deploy slash commands
 ```node src/deploy-commands.js```
 
-6. Run the bot locally
+7. Run the bot locally
 ```node src/app.js```
 * Global commands can take up to an hour to update.
 
-To clear all commands, run
+8. To clear all commands, run
 ```node src/clear-commands.js```
 
