@@ -20,8 +20,15 @@ export default {
 		}
 
 		try {
-			const summary = await handleCommand(interaction.channel, count);
-			await interaction.editReply(summary || '⚠️ Could not generate summary.');
+			const finalText = await handleCommand(interaction.channel, count);
+			console.log(finalText);
+
+			if (finalText.length === 0) {
+                await interaction.editReply('⚠️ Could not generate summary.');
+                return;
+            }
+
+            await interaction.editReply(finalText);
 		} catch (err) {
 			console.error(err);
 			await interaction.editReply('❌ Error while summarizing messages.');

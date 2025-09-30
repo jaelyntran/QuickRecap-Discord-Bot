@@ -1,5 +1,26 @@
 import { SummarizerManager } from "node-summarizer";
 
+function cleanContent(content) {
+  return content
+    .replace(/<a?:\w+:\d+>/g, '')
+    .replace(/<@!?\d+>/g, '')
+    .replace(/<#[0-9]+>/g, '')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/https?:\/\/\S+/g, '')
+    .trim()
+    .replace(/^[:?]+\s*/, '')
+    .replace(/\s*[:?]+$/, '');
+}
+
+function chunkMessages(messages, maxMessages = 30) {
+  const chunks = [];
+  for (let i = 0; i < messages.length; i += maxMessages) {
+    const chunk = messages.slice(i, i + maxMessages);
+    chunks.push(chunk.map(m => `${m.username}: ${m.content}`).join("\n"));
+  }
+  return chunks;
+}
+
 export async function summarizeMessages(text) {
     if (!text || text.trim().length === 0) return "⚠️ No messages to summarize.";
 
@@ -27,10 +48,38 @@ export async function handleCommand(channel, count) {
         lastId = batch.last().id;
     }
 
-    const filteredMessages = allMessages
-        .filter(message => !message.author.bot && message.content.trim().length > 0)
-        .map(message => `${message.author.username}: ${message.content}`)
+    console.log(`Fetched a total of ${allMessages.length} messages`);
 
-    const text = filteredMessages.reverse().join('\n');
-    return summarizeMessages(text);
+    const filtered = allMessages
+        .filter(m => !m.author.bot && m.content.trim().length > 0)
+        .map(m => ({
+          username: m.author.username,
+          content: cleanContent(m.content),
+        }))
+        .filter(m => m.content.length > 0)
+        .reverse();
+    console.log(filtered);
+
+    if (filtered.length === 0) return "⚠️ No messages to summarize.";
+
+    console.log(`After filtering, ${filtered.length} messages remain`);
+
+    const chunks = chunkMessages(filtered);
+    console.log("Chunks to summarize:");
+    chunks.forEach((chunk, i) => console.log(`--- Chunk ${i + 1} ---\n${chunk}\n`));
+
+    const chunkSummaries = [];
+    for (const [index, chunk] of chunks.entries()) {
+      const summary = await summarizeMessages(chunk);
+      const cleanedSummary = summary
+        .split("\n")
+        .filter(line => /^.+:\s.+$/.test(line))
+        .join("\n");
+      chunkSummaries.push(cleanedSummary);
+      console.log(`--- Summary for chunk ${index + 1} ---\n${cleanedSummary}\n`);
+    }
+
+    const finalSummary = chunkSummaries.join("\n");
+    console.log("--- FINAL SUMMARY ---\n", finalSummary);
+    return finalSummary;
 }
