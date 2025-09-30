@@ -26,12 +26,19 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 (async () => {
 	try {
         console.log(`Started refreshing ${commands.length} application (/) commands.`);
-        const data = await rest.put(
-        	Routes.applicationGuildCommands(process.env.APP_ID, process.env.GUILD_ID),
-        	{ body: commands },
-        );
+        if (process.env.GUILD_ID) {
+            await rest.put(
+                Routes.applicationGuildCommands(process.env.APP_ID, process.env.GUILD_ID),
+                { body: commands }
+            );
+            console.log(`Successfully reloaded ${commands.length} guild commands.`);
+        }
 
-        console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+        await rest.put(
+            Routes.applicationCommands(process.env.APP_ID),
+            body: commands }
+        );
+        console.log(`Successfully reloaded ${commands.length} global commands.`);
     } catch (err) {
         console.error(err);
     }
