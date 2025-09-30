@@ -2,8 +2,8 @@ import { SlashCommandBuilder } from 'discord.js';
 
 export default {
 	data: new SlashCommandBuilder()
-		.setName('autosummarize')
-		.setDescription('Enable or disable auto summarization per 100 messages in this channel')
+		.setName('autosummary')
+		.setDescription('Enable or disable auto summary per 100 messages in this channel')
 		.addStringOption(option =>
 			option.setName('mode')
 				.setDescription('Turn auto-summary on or off')
@@ -14,7 +14,7 @@ export default {
 				)
 		),
 	async execute(interaction) {
-	    console.log('AutoSummarize mode set')
+	    console.log('AutoSummary mode set')
 		const mode = interaction.options.getString('mode');
 		const { autoSummaryChannels } = interaction.client;
 
@@ -22,8 +22,8 @@ export default {
 
 		await interaction.reply(
 			mode === 'on'
-				? '✅ Auto-summarization is now on for this channel.'
-				: '❌ Auto-summarization is now off for this channel.'
+				? '✅ Auto-summary is now on for this channel.'
+				: '❌ Auto-summary is now off for this channel.'
 		);
 	},
 };

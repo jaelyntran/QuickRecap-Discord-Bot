@@ -17,7 +17,7 @@ export default {
 				const text = client.messageBuffer[channelId].join('\n');
 				try {
 					const summary = await summarizeMessages(text);
-					await message.channel.send(`📝 **Auto-summary of last 100 messages:**\n${summary}`);
+					await message.channel.send(`📝 **Auto-summary of the last 100 messages:**\n${summary}`);
 				} catch (err) {
 					console.error(err);
 				}

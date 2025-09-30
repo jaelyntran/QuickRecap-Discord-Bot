@@ -27,12 +27,10 @@ export async function handleCommand(channel, count) {
         lastId = batch.last().id;
     }
 
-    console.log(`Fetched a total of ${allMessages.length} messages`);
     const filteredMessages = allMessages
         .filter(message => !message.author.bot && message.content.trim().length > 0)
         .map(message => `${message.author.username}: ${message.content}`)
 
     const text = filteredMessages.reverse().join('\n');
-    console.log(text);
     return summarizeMessages(text);
 }

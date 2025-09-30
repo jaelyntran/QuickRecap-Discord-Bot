@@ -4,7 +4,7 @@ import { handleCommand } from '../utils.js';
 export default {
 	data: new SlashCommandBuilder()
 		.setName('summarize')
-		.setDescription('Summarizes the last N messages in this channel (up to 500)')
+		.setDescription('Summarizes the last N messages in this channel (up to 300)')
 		.addIntegerOption(option =>
 			option.setName('count')
 				.setDescription('Number of messages to summarize (default 100)')
