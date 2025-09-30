@@ -35,5 +35,28 @@ PUBLIC_KEY=your-public-key
 
 7. Run the bot locally ```node src/app.js``` (Global commands can take up to an hour to update).
 
-8. To clear all commands, run ```node src/clear-commands.js```.
+8. (Optional) To clear all commands, run ```node src/clear-commands.js```.
 
+
+## Commands Reference
+- ```/summarize``` → Summarizes the last N messages in the current channel (up to 300 messages, default is set to 100).
+- ```/autosummary``` → Automatically summarizes messages once every 100 messages.
+
+
+## Features
+- Summarizes recent messages in a channel.
+- Auto-summarizes messages periodically.
+- Ignores bot messages.
+- Cleans mentions, links, and unnecessary characters from summaries.
+
+
+## Known Issues / Limitations
+- `node-summarizer` relies on word frequency rather than semantic understanding. This can cause messages to appear out of order, truncate large text chunks, or split/omit parts of messages, leading to less accurate summaries.
+- Global command registration can take up to 1 hour to propagate across all servers.
+- Large message histories require multiple requests and may slow down the bot.
+
+
+## Credits / Acknowledgements
+- discord.js → Discord bot library
+- node-summarizer → Message summarization library
+- Inspired by community feedback for simplifying long chat threads
