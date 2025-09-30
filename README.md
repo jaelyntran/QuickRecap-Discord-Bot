@@ -60,3 +60,7 @@ PUBLIC_KEY=your-public-key
 - discord.js → Discord bot library
 - node-summarizer → Message summarization library
 - Inspired by community feedback for simplifying long chat threads
+
+## Takeaway
+
+While node-summarizer has clear limitations, it was chosen for its simplicity and zero cost. This allows rapid development and easy deployment without relying on paid APIs. For projects requiring highly accurate, chronological summaries, a more advanced AI-based solution would be preferable.
