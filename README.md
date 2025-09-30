@@ -33,8 +33,7 @@ PUBLIC_KEY=your-public-key
 
 6. Deploy slash commands ```node src/deploy-commands.js```.
 
-7. Run the bot locally ```node src/app.js```.
-* Global commands can take up to an hour to update.
+7. Run the bot locally ```node src/app.js``` (Global commands can take up to an hour to update).
 
 8. To clear all commands, run ```node src/clear-commands.js```.
 
