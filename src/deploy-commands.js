@@ -36,7 +36,7 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 
         await rest.put(
             Routes.applicationCommands(process.env.APP_ID),
-            body: commands }
+            { body: commands }
         );
         console.log(`Successfully reloaded ${commands.length} global commands.`);
     } catch (err) {
