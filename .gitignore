@@ -27,6 +27,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store.env
+.DS_Store
 Counter-Discord-Bot.iml
 .idea/
 .env

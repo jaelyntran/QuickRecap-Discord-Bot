@@ -9,13 +9,30 @@ export async function summarizeMessages(text) {
 }
 
 export async function handleCommand(channel, count) {
-    const fetched = await channel.messages.fetch({ limit: count });
-    const messages = Array.from(fetched.values());
+    const limit = Math.min(count, 300)
+    let remaining = limit;
+    let lastId;
+    const allMessages = [];
 
-    const filteredMessages = messages
+    while (remaining > 0) {
+        const fetchSize = Math.min(remaining, 100);
+        const options = { limit: fetchSize };
+        if (lastId) options.before = lastId;
+
+        const batch = await channel.messages.fetch(options);
+        if (batch.size === 0) break;
+
+        allMessages.push(...batch.values());
+        remaining -= batch.size;
+        lastId = batch.last().id;
+    }
+
+    console.log(`Fetched a total of ${allMessages.length} messages`);
+    const filteredMessages = allMessages
         .filter(message => !message.author.bot && message.content.trim().length > 0)
-        .map(message => message.content)
+        .map(message => `${message.author.username}: ${message.content}`)
 
-    const text = filteredMessages.join('\n');
+    const text = filteredMessages.reverse().join('\n');
+    console.log(text);
     return summarizeMessages(text);
 }
