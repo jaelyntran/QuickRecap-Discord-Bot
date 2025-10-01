@@ -28,10 +28,17 @@ export default {
                 return;
             }
 
-            await interaction.editReply('📝 Summary generated in multiple parts:');
-            for (const chunk of summaryChunks) {
-                await interaction.followUp(chunk);
-            }
+            await interaction.editReply(`📝 **Summary generated in multiple parts**`);
+            summaryChunks.forEach((chunk, index) => {
+                const isLast = index === summaryChunks.length - 1;
+                const chunkNumber = index + 1;
+                const totalChunks = summaryChunks.length;
+
+                const messageContent = `**Chunk ${chunkNumber}/${totalChunks}:**\n${chunk}`
+                                        + (isLast ? `\n **--- End of summary ---**` : '');
+
+                interaction.followUp(messageContent);
+            });
 		} catch (err) {
 			console.error(err);
 			await interaction.editReply('❌ Error while summarizing messages.');

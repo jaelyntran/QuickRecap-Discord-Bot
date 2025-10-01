@@ -22,13 +22,21 @@ export default {
                     `Stored raw: ${message.author.username}: ${message.content} | Total = ${client.messageBuffer[channelId].length}`
             );
 
-			if (client.messageBuffer[channelId].length >= 30) {
+			if (client.messageBuffer[channelId].length >= 50) {
 				try {
 					const summaryChunks = await handleCommand(client.messageBuffer[channelId]);
-					await message.channel.send(`📝 **Auto-summary of the last 30 messages:**`);
-					for (const chunk of summaryChunks) {
-                        await message.channel.send({ content: chunk });
-                    }
+					await message.channel.send(`📝 **Auto-summary of the last 50 messages**`);
+
+					summaryChunks.forEach((chunk, index) => {
+					    const isLast = index === summaryChunks.length - 1;
+                        const chunkNumber = index + 1;
+                        const totalChunks = summaryChunks.length;
+
+                        const messageContent = `**Part ${chunkNumber}/${totalChunks}:**\n${chunk}`
+                                             + (isLast ? `\n**--- End of summary ---**` : '');
+
+                        message.channel.send(messageContent);
+                    });
 				} catch (err) {
 					console.error(err);
 				}

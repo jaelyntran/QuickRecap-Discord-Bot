@@ -3,7 +3,7 @@ import { SlashCommandBuilder } from 'discord.js';
 export default {
 	data: new SlashCommandBuilder()
 		.setName('autosummary')
-		.setDescription('Enable or disable auto summary per 30 messages in this channel')
+		.setDescription('Enable or disable auto summary per 50 messages in this channel')
 		.addStringOption(option =>
 			option.setName('mode')
 				.setDescription('Turn auto-summary on or off')

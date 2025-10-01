@@ -59,7 +59,7 @@ export async function handleCommand(allMessages) {
     const filtered = allMessages
             .filter(m => m.content && m.content.trim().length > 0)
             .map(m => ({
-              username: m.author.username,
+              username:m.username ?? m.author?.username,
               content: cleanContent(m.content),
             }))
             .filter(m => m.content.length > 0)
