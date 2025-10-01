@@ -1,23 +1,34 @@
 import { Events } from 'discord.js';
-import { summarizeMessages } from '../utils.js';
+import { handleCommand } from '../utils.js';
 
 export default {
 	name: Events.MessageCreate,
 	async execute(message, client) {
 		if (message.author.bot) return;
-		console.log(`${message.author.username}: ${message.content}`);
 
 		const channelId = message.channel.id;
 
 		if (client.autoSummaryChannels[channelId]) {
-			if (!client.messageBuffer[channelId]) client.messageBuffer[channelId] = [];
-			client.messageBuffer[channelId].push(`${message.author.username}: ${message.content}`);
+			if (!client.messageBuffer[channelId]) {
+			    client.messageBuffer[channelId] = [];
+			}
 
-			if (client.messageBuffer[channelId].length > 100) {
-				const text = client.messageBuffer[channelId].join('\n');
+            client.messageBuffer[channelId].push({
+                    username: message.author.username,
+                    content: message.content,
+            });
+
+            console.log(
+                    `Stored raw: ${message.author.username}: ${message.content} | Total = ${client.messageBuffer[channelId].length}`
+            );
+
+			if (client.messageBuffer[channelId].length >= 30) {
 				try {
-					const summary = await summarizeMessages(text);
-					await message.channel.send(`📝 **Auto-summary of the last 100 messages:**\n${summary}`);
+					const summaryChunks = await handleCommand(client.messageBuffer[channelId]);
+					await message.channel.send(`📝 **Auto-summary of the last 30 messages:**`);
+					for (const chunk of summaryChunks) {
+                        await message.channel.send({ content: chunk });
+                    }
 				} catch (err) {
 					console.error(err);
 				}

@@ -1,5 +1,4 @@
 import { Events, MessageFlags } from 'discord.js';
-import { handleCommand, summarizeMessages } from '../utils.js';
 
 export default {
 	name: Events.InteractionCreate,
