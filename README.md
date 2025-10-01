@@ -39,8 +39,8 @@ PUBLIC_KEY=your-public-key
 8. (Optional) To clear all commands, run ```node src/clear-commands.js```
 
 ## Commands Reference
-- `/summarize` → Summarizes the last N messages in the current channel (up to 300 messages, default is set to 100).
-- `/autosummary` → Automatically summarizes messages once every 100 messages.
+- `/summarize` → Summarizes the last N messages in the current channel (up to 200 messages, default is set to 100).
+- `/autosummary` → Automatically summarizes messages once every 50 messages.
 
 ## Features
 - Summarizes recent messages in a channel.
