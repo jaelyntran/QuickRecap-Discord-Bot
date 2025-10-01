@@ -20,6 +20,10 @@ export default {
 
 		autoSummaryChannels[interaction.channel.id] = (mode === 'on');
 
+		if (mode === 'off' && interaction.client.messageBuffer[interaction.channel.id]) {
+            interaction.client.messageBuffer[interaction.channel.id] = [];
+        }
+
 		await interaction.reply(
 			mode === 'on'
 				? '✅ Auto-summary is now on for this channel.'
