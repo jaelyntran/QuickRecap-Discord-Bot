@@ -1,3 +1,4 @@
+#QuickRecap-Discord-Bot
 This project contains a message summary Discord app written in JavaScript.
 
 ## Inviting the Bot to the Server (No Setup Required)
